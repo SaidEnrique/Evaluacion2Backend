@@ -5,32 +5,117 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Evaluacion2 - Tienda</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f6f8fb;
+    }
+
+    /* Navbar */
+    .navbar {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border-bottom: 2px solid #f0f0f0;
+      background-color: #ffffff;
+    }
+
+    .navbar-item,
+    .navbar-link {
+      font-weight: 500;
+    }
+
+    .navbar-item:hover {
+      background-color: #f0f0f0 !important;
+      color: #3273dc !important;
+    }
+
+    .navbar-link::after {
+      border-color: #3273dc;
+    }
+
+    /* Header Title */
+    .page-title {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #363636;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #3273dc;
+      color: white;
+      padding: 2rem 1rem;
+      margin-top: 4rem;
+      text-align: center;
+    }
+
+    footer a {
+      color: #f5f5f5;
+      text-decoration: underline;
+    }
+
+    footer a:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* Smooth hover links */
+    a.navbar-item, a.navbar-link {
+      transition: all 0.2s ease-in-out;
+    }
+  </style>
 </head>
+
 <body>
-<nav class="navbar is-light" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="{% url 'products:index' %}">Evaluacion2</a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start">
-      <a class="navbar-item" href="{% url 'products:index' %}">Inicio</a>
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">Categorías</a>
-        <div class="navbar-dropdown">
-          {% for cat in categories %}
-            <a class="navbar-item" href="{% url 'products:category' cat.slug %}">{{ cat.name }}</a>
-          {% empty %}
-            <div class="navbar-item">No hay categorías</div>
-          {% endfor %}
+  <!-- Navbar -->
+  <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item has-text-weight-semibold is-size-5" href="{% url 'products:index' %}">
+        🛍️ Evaluacion2
+      </a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="navbarMenu" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="{% url 'products:index' %}">Inicio</a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">Categorías</a>
+          <div class="navbar-dropdown is-boxed">
+            {% for cat in categories %}
+              <a class="navbar-item" href="{% url 'products:category' cat.slug %}">
+                {{ cat.name }}
+              </a>
+            {% empty %}
+              <div class="navbar-item has-text-grey">No hay categorías</div>
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</nav>
-<section class="section">
-  <div class="container">
-    {% block content %}{% endblock %}
-  </div>
-</section>
+  </nav>
+
+  <!-- Contenido principal -->
+  <section class="section">
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p><strong>Evaluacion2</strong> — Pagina de Ecommerce para prog Backend</p>
+    <p>Desarrollado con 💙 por <a href="#">SaidEnrique</a></p>
+  </footer>
 </body>
 </html>
