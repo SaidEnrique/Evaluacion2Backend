@@ -1,0 +1,20 @@
+{% extends 'products/base.html' %}
+{% block content %}
+<div class="columns">
+  <div class="column is-one-third">
+    {% if product.image %}
+      <figure class="image is-3by4"><img src="{{ product.image.url }}" alt="{{ product.name }}"></figure>
+    {% else %}
+      <figure class="image is-3by4"><img src="https://via.placeholder.com/400x600?text=Sin+imagen"></figure>
+    {% endif %}
+  </div>
+  <div class="column">
+    <h1 class="title">{{ product.name }}</h1>
+    <h2 class="subtitle">$ {{ product.price }}</h2>
+    <p><strong>Stock:</strong> {{ product.stock }}</p>
+    <hr>
+    <p>{{ product.description|linebreaks }}</p>
+    <p class="mt-4"><a href="{% url 'products:index' %}">&larr; Volver</a></p>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'products/base.html' %}
+{% block content %}
+<h1 class="title">Todos los productos</h1>
+<div class="columns is-multiline">
+  {% for product in products %}
+  <div class="column is-one-quarter">
+    <div class="card">
+      <div class="card-image">
+        {% if product.image %}
+          <figure class="image is-4by3"><img src="{{ product.image.url }}" alt="{{ product.name }}"></figure>
+        {% else %}
+          <figure class="image is-4by3"><img src="https://via.placeholder.com/300x225?text=Sin+imagen"></figure>
+        {% endif %}
+      </div>
+      <div class="card-content">
+        <p class="title is-5"><a href="{% url 'products:detail' product.pk %}">{{ product.name }}</a></p>
+        <p class="subtitle is-6">$ {{ product.price }}</p>
+        <p>Stock: {{ product.stock }}</p>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+    <p>No hay productos disponibles.</p>
+  {% endfor %}
+</div>
+{% endblock %}
